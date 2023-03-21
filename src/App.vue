@@ -1,10 +1,11 @@
 <script setup lang="ts">
 import HelloWorld from "./components/HelloWorld.vue";
-import { computed, Ref, ref } from "vue";
+import { computed, Ref, ref, reactive } from "vue";
 const myNumber: Ref<number> = ref(5);
 const inputText: Ref<string> = ref("");
-const inputTextLength: Ref<number> = ref(0);
 
+const state = reactive({ count: 0 });
+const increaseCount = () => state.count++;
 const numberOfCharEntered = computed(() => {
   return inputText.value.length;
 });
@@ -18,6 +19,13 @@ const numberOfCharEntered = computed(() => {
     <p>{{ inputText }}</p>
     <input v-model="inputText" />
     <span> {{ numberOfCharEntered }} / 10 characters entered</span>
+    <hr />
+    <br />
+    <br />
+    <div>
+      <p>Count is {{ state.count }}</p>
+      <button @click="increaseCount">Increase count</button>
+    </div>
   </div>
   <HelloWorld msg="Vite + Vue" />
 </template>
